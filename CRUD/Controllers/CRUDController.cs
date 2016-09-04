@@ -41,9 +41,16 @@ namespace CRUD.Controllers
                 mdl.status = repo.insertarEmpleado(mdl.empleado);
             }
             if (mdl.status == true)
-                return RedirectToAction("Index");
+            {
+                mdl.mensaje = "Guardado con éxito";
+                mdl.listaEmpleados = repo.getEmpleados();
+                return View("Index", mdl);
+            }
             else
+            {
+                mdl.mensaje = "Error al guardar";
                 return View(mdl);
+            }
         }
 
         public ActionResult EliminarEmpleado(int id)

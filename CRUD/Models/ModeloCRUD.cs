@@ -17,5 +17,6 @@ namespace CRUD.Models
         public Employee empleado { get; set; }
         public List<Employee> listaEmpleados { get; set; }
         public bool status { get; set; }
+        public string mensaje { get; set; }
     }
 }

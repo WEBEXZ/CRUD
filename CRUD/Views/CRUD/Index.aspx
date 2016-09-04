@@ -15,10 +15,12 @@
             Agregar Empleado
         </button>
 
+        <h2><%: Model.mensaje %></h2>
+
         <div class="form-panel">
             <div class="row mt">
             <div class="col-lg-12" style="overflow:auto; margin-left: 1%; width: 98%;height: 500px;">
-               <% if (Model.listaEmpleados != null) { %> 
+               <% if (Model.listaEmpleados != null) { %>
                        <% if (Model.listaEmpleados.Count() > 0)
                           {%>
                                  <table class="table" border=0 cellpadding=0 cellspacing=0 style='border-collapse: collapse;width:100%'>
