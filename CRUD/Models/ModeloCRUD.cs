@@ -11,12 +11,17 @@ namespace CRUD.Models
         public ModeloCRUD()
         {
             empleado = new Employee();
+            producto = new Product();
             listaEmpleados = new List<Employee>();
+            listaProductos = new List<Product>();
         }
+
         //Variables a utilizar
         public Employee empleado { get; set; }
         public List<Employee> listaEmpleados { get; set; }
         public bool status { get; set; }
         public string mensaje { get; set; }
+        public Product producto { get; set; }
+        public List<Product> listaProductos { get; set; }
     }
 }

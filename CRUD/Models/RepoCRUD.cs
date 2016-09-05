@@ -18,11 +18,27 @@ namespace CRUD.Models
             return empleado;
         }
 
+        //Obtener un producto por ID
+        public Product getProducto(int id)
+        {
+            Product producto = new Product();
+            producto = db.Products.SingleOrDefault(p => p.ProductID == id);
+            return producto;
+        }
+
         //Obtener lista de empleados
         public List<Employee> getEmpleados()
         {
             List<Employee> lista = new List<Employee>();
             lista = db.Employees.ToList();
+            return lista;
+        }
+
+        //Obtener lista de productos
+        public List<Product> getProductos()
+        {
+            List<Product> lista = new List<Product>();
+            lista = db.Products.ToList();
             return lista;
         }
 
@@ -32,6 +48,21 @@ namespace CRUD.Models
             try
             {
                 db.Employees.InsertOnSubmit(e);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Insertar un producto
+        public Boolean insertarProducto(Product p)
+        {
+            try
+            {
+                db.Products.InsertOnSubmit(p);
                 db.SubmitChanges();
                 return true;
             }
@@ -68,6 +99,25 @@ namespace CRUD.Models
             }
         }
 
+        //Editar un producto
+        public bool editarProducto(Product p)
+        {
+            Product productoActual = db.Products.SingleOrDefault(m => m.ProductID == p.ProductID);
+            try
+            {
+                productoActual.ProductName = p.ProductName;
+                productoActual.UnitPrice = p.UnitPrice;
+                productoActual.UnitsInStock = p.UnitsInStock;
+                productoActual.UnitsOnOrder = p.UnitsOnOrder;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         //Eliminar un empleado por ID
         public bool eliminarEmpleado(int id)
         {
@@ -79,6 +129,22 @@ namespace CRUD.Models
                 return true;
             }
             catch 
+            {
+                return false;
+            }
+        }
+
+        //Eliminar un producto por ID
+        public bool eliminarProducto(int id)
+        {
+            Product producto = db.Products.SingleOrDefault(m => m.ProductID == id);
+            try
+            {
+                db.Products.DeleteOnSubmit(producto);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
             {
                 return false;
             }

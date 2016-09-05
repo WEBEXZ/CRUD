@@ -277,7 +277,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Views\CRUD\FormularioEmpleado.aspx" />
-    <Content Include="Views\CRUD\Index.aspx" />
+    <Content Include="Views\CRUD\Empleados.aspx" />
+    <Content Include="Views\CRUD\FormularioProducto.aspx" />
+    <Content Include="Views\CRUD\Productos.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

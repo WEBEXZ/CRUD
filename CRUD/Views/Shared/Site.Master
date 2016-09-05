@@ -21,9 +21,8 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li><%: Html.ActionLink("Home", "Index", "Home") %></li>
-                            <li><%: Html.ActionLink("About", "About", "Home") %></li>
-                            <li><%: Html.ActionLink("Contact", "Contact", "Home") %></li>
+                            <li><%: Html.ActionLink("Empleados", "Empleados", "CRUD") %></li>
+                            <li><%: Html.ActionLink("Productos", "Productos", "CRUD") %></li>
                         </ul>
                     </nav>
                 </div>
