@@ -23,7 +23,23 @@ namespace CRUD.Controllers
         {
             ModeloCRUD mdl = new ModeloCRUD();
             RepoCRUD repo = new RepoCRUD();
-            mdl.listaProductos = repo.getProductos();
+            mdl.listaProductos = repo.getProductos();            
+            return View(mdl);
+        }
+
+        public ActionResult Categorias()
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            mdl.listaCategorias = repo.getCategorias();
+            return View(mdl);
+        }
+
+        public ActionResult Proveedores()
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            mdl.listaProveedores = repo.getProveedores();
             return View(mdl);
         }
 
@@ -42,6 +58,27 @@ namespace CRUD.Controllers
             RepoCRUD repo = new RepoCRUD();
             if (id != 0)
                 mdl.producto = repo.getProducto(id);
+
+            ViewBag.nombreCategorias = new SelectList(repo.getCategorias(), "CategoryID", "CategoryName");
+            ViewBag.nombreProveedores = new SelectList(repo.getProveedores(), "SupplierID", "CompanyName");
+            return View(mdl);
+        }
+
+        public ActionResult FormularioCategoria(int id)
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            if (id != 0)
+                mdl.categoria = repo.getCategoria(id);
+            return View(mdl);
+        }
+
+        public ActionResult FormularioProveedor(int id)
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            if (id != 0)
+                mdl.proveedor = repo.getProveedor(id);
             return View(mdl);
         }
 
@@ -74,6 +111,7 @@ namespace CRUD.Controllers
         public ActionResult FormularioProducto(ModeloCRUD mdl)
         {
             RepoCRUD repo = new RepoCRUD();
+            ModeloCRUD m = new ModeloCRUD();            
             if (mdl.producto.ProductID != 0)
             {
                 mdl.status = repo.editarProducto(mdl.producto);
@@ -84,9 +122,59 @@ namespace CRUD.Controllers
             }
             if (mdl.status == true)
             {
-                mdl.mensaje = "Guardado con éxito";
                 mdl.listaProductos = repo.getProductos();
+                mdl.mensaje = "Guardado con éxito";                
                 return View("Productos", mdl);
+            }
+            else
+            {
+                mdl.mensaje = "Error al guardar";
+                return View(mdl);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult FormularioCategoria(ModeloCRUD mdl)
+        {
+            RepoCRUD repo = new RepoCRUD();
+            if (mdl.categoria.CategoryID != 0)
+            {
+                mdl.status = repo.editarCategoria(mdl.categoria);
+            }
+            else
+            {
+                mdl.status = repo.insertarCategoria(mdl.categoria);
+            }
+            if (mdl.status == true)
+            {
+                mdl.mensaje = "Guardado con éxito";
+                mdl.listaCategorias = repo.getCategorias();
+                return View("Categorias", mdl);
+            }
+            else
+            {
+                mdl.mensaje = "Error al guardar";
+                return View(mdl);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult FormularioProveedor(ModeloCRUD mdl)
+        {
+            RepoCRUD repo = new RepoCRUD();
+            if (mdl.proveedor.SupplierID != 0)
+            {
+                mdl.status = repo.editarProveedor(mdl.proveedor);
+            }
+            else
+            {
+                mdl.status = repo.insertarProveedor(mdl.proveedor);
+            }
+            if (mdl.status == true)
+            {
+                mdl.mensaje = "Guardado con éxito";
+                mdl.listaProveedores = repo.getProveedores();
+                return View("Proveedores", mdl);
             }
             else
             {
@@ -109,6 +197,22 @@ namespace CRUD.Controllers
             RepoCRUD repo = new RepoCRUD();
             mdl.status = repo.eliminarProducto(id);
             return RedirectToAction("Productos", mdl);
+        }
+
+        public ActionResult EliminarCategoria(int id)
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            mdl.status = repo.eliminarCategoria(id);
+            return RedirectToAction("Categorias", mdl);
+        }
+
+        public ActionResult EliminarProveedor(int id)
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            mdl.status = repo.eliminarProveedor(id);
+            return RedirectToAction("Proveedores", mdl);
         }
     }
 }

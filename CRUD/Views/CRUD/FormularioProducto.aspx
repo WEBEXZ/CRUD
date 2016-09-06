@@ -4,6 +4,7 @@
     Formulario Producto
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <form id="form1" runat="server">
 <div class="container" style="min-height:600px;">
     <% using (Html.BeginForm("FormularioProducto", "CRUD", FormMethod.Post, new { id = "Formulario", name = "Formulario", @role = "form", @class = "form-inline" }))
     { %>
@@ -50,16 +51,35 @@
             </div>
         </div>
 
-        
+        <div class="form-group col-md-6" >
+            <label for="txtEstado">Categoría</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fa fa-sort-numeric-asc"></span>
+                </span>
+                <%: Html.DropDownListFor(m => m.producto.CategoryID, ViewBag.nombreCategorias as SelectList, "Categorias...", new { })%>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label for="txtEstado">Proveedor</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fa fa-sort-numeric-asc"></span>
+                </span>
+                <%: Html.DropDownListFor(m => m.producto.SupplierID, ViewBag.nombreProveedores as SelectList, "Proveedores...", new { })%>
+            </div>
+        </div>
     </div>
     <div class="row  form-group" style="width:100%; margin-top:25px;">
         <div class=" col-md-12 text-left" >
-            <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar </button>
+            <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
             <button type="button" class="btn btn-default" onclick="location.href='/CRUD/Productos'" ><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
         </div>
     </div>
     <%} %>
 </div>
+    </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CRUD.Models
 {
@@ -26,6 +27,22 @@ namespace CRUD.Models
             return producto;
         }
 
+        //Obtener una categoria por ID
+        public Category getCategoria(int id)
+        {
+            Category categoria = new Category();
+            categoria = db.Categories.SingleOrDefault(p => p.CategoryID == id);
+            return categoria;
+        }
+
+        //Obtener un proveedor por ID
+        public Supplier getProveedor(int id)
+        {
+            Supplier proveedor = new Supplier();
+            proveedor = db.Suppliers.SingleOrDefault(p => p.SupplierID == id);
+            return proveedor;
+        }
+
         //Obtener lista de empleados
         public List<Employee> getEmpleados()
         {
@@ -39,6 +56,22 @@ namespace CRUD.Models
         {
             List<Product> lista = new List<Product>();
             lista = db.Products.ToList();
+            return lista;
+        }
+
+        //Obtener lista de categorias
+        public List<Category> getCategorias()
+        {
+            List<Category> lista = new List<Category>();
+            lista = db.Categories.ToList();
+            return lista;
+        }
+
+        //Obtener lista de proveedores
+        public List<Supplier> getProveedores()
+        {
+            List<Supplier> lista = new List<Supplier>();
+            lista = db.Suppliers.ToList();
             return lista;
         }
 
@@ -63,6 +96,36 @@ namespace CRUD.Models
             try
             {
                 db.Products.InsertOnSubmit(p);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Insertar una categoria
+        public Boolean insertarCategoria(Category c)
+        {
+            try
+            {
+                db.Categories.InsertOnSubmit(c);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Insertar un proveedor
+        public Boolean insertarProveedor(Supplier p)
+        {
+            try
+            {
+                db.Suppliers.InsertOnSubmit(p);
                 db.SubmitChanges();
                 return true;
             }
@@ -109,6 +172,45 @@ namespace CRUD.Models
                 productoActual.UnitPrice = p.UnitPrice;
                 productoActual.UnitsInStock = p.UnitsInStock;
                 productoActual.UnitsOnOrder = p.UnitsOnOrder;
+                productoActual.CategoryID = p.CategoryID;
+                productoActual.SupplierID = p.SupplierID;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Editar una categoria
+        public bool editarCategoria(Category c)
+        {
+            Category categoriactual = db.Categories.SingleOrDefault(m => m.CategoryID == c.CategoryID);
+            try
+            {
+                categoriactual.CategoryName = c.CategoryName;
+                categoriactual.Description = c.Description;
+                categoriactual.Picture = c.Picture;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Editar un proveedor
+        public bool editarProveedor(Supplier p)
+        {
+            Supplier proveedorActual = db.Suppliers.SingleOrDefault(m => m.SupplierID == p.SupplierID);
+            try
+            {
+                proveedorActual.CompanyName = p.CompanyName;
+                proveedorActual.ContactName = p.ContactName;
+                proveedorActual.Address = p.Address;
+                proveedorActual.Phone = p.Phone;
                 db.SubmitChanges();
                 return true;
             }
@@ -141,6 +243,38 @@ namespace CRUD.Models
             try
             {
                 db.Products.DeleteOnSubmit(producto);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Eliminar una categoria por ID
+        public bool eliminarCategoria(int id)
+        {
+            Category categoria = db.Categories.SingleOrDefault(m => m.CategoryID == id);
+            try
+            {
+                db.Categories.DeleteOnSubmit(categoria);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Eliminar un proveedor por ID
+        public bool eliminarProveedor(int id)
+        {
+            Supplier proveedor = db.Suppliers.SingleOrDefault(m => m.SupplierID == id);
+            try
+            {
+                db.Suppliers.DeleteOnSubmit(proveedor);
                 db.SubmitChanges();
                 return true;
             }
