@@ -26,10 +26,12 @@
                                  <table class="table" border=0 cellpadding=0 cellspacing=0 style='border-collapse: collapse;width:100%'>
                                      <tr>
                                          <th style='width:5%;border-left:none;'>#</th>
-                                         <th style='width:25%;border-left:none;'>Nombre</th>
+                                         <th style='width:20%;border-left:none;'>Nombre</th>
                                          <th style='width:15%;border-left:none;'>Contacto</th>
                                          <th style='width:21%;border-left:none;'>Direccion</th>
                                          <th style='width:15%;border-left:none;'>Teléfono</th>
+                                         <th style='width:10%;border-left:none;'>Estado</th>
+                                         <th style='width:10%;border-left:none;'>Municipio</th>
                                          <th style='width:25%;border-left:none;'>Opciones</th>
                                      </tr>
 
@@ -49,6 +51,12 @@
                                         </td>
                                         <td>
                                             <%: item.Phone %>
+                                        </td>
+                                        <td>
+                                            <%: item.EstadoID %>
+                                        </td>
+                                        <td>
+                                            <%: item.MunicipioID %>
                                         </td>
                                         <td>
                                             <button type="button" title="Editar" onclick="location.href='/CRUD/FormularioProveedor/<%: item.SupplierID %>';" >Editar</button>

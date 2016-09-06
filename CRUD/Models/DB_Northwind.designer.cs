@@ -42,6 +42,12 @@ namespace CRUD.Models
     partial void InsertSupplier(Supplier instance);
     partial void UpdateSupplier(Supplier instance);
     partial void DeleteSupplier(Supplier instance);
+    partial void InsertCat_Estado(Cat_Estado instance);
+    partial void UpdateCat_Estado(Cat_Estado instance);
+    partial void DeleteCat_Estado(Cat_Estado instance);
+    partial void InsertCat_Municipio(Cat_Municipio instance);
+    partial void UpdateCat_Municipio(Cat_Municipio instance);
+    partial void DeleteCat_Municipio(Cat_Municipio instance);
     #endregion
 		
 		public DB_NorthwindDataContext() : 
@@ -103,6 +109,22 @@ namespace CRUD.Models
 			get
 			{
 				return this.GetTable<Supplier>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cat_Estado> Cat_Estados
+		{
+			get
+			{
+				return this.GetTable<Cat_Estado>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cat_Municipio> Cat_Municipios
+		{
+			get
+			{
+				return this.GetTable<Cat_Municipio>();
 			}
 		}
 	}
@@ -1198,6 +1220,10 @@ namespace CRUD.Models
 		
 		private string _HomePage;
 		
+		private System.Nullable<int> _EstadoID;
+		
+		private System.Nullable<int> _MunicipioID;
+		
 		private EntitySet<Product> _Products;
 		
     #region Extensibility Method Definitions
@@ -1228,6 +1254,10 @@ namespace CRUD.Models
     partial void OnFaxChanged();
     partial void OnHomePageChanging(string value);
     partial void OnHomePageChanged();
+    partial void OnEstadoIDChanging(System.Nullable<int> value);
+    partial void OnEstadoIDChanged();
+    partial void OnMunicipioIDChanging(System.Nullable<int> value);
+    partial void OnMunicipioIDChanged();
     #endregion
 		
 		public Supplier()
@@ -1476,6 +1506,46 @@ namespace CRUD.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstadoID", DbType="Int")]
+		public System.Nullable<int> EstadoID
+		{
+			get
+			{
+				return this._EstadoID;
+			}
+			set
+			{
+				if ((this._EstadoID != value))
+				{
+					this.OnEstadoIDChanging(value);
+					this.SendPropertyChanging();
+					this._EstadoID = value;
+					this.SendPropertyChanged("EstadoID");
+					this.OnEstadoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MunicipioID", DbType="Int")]
+		public System.Nullable<int> MunicipioID
+		{
+			get
+			{
+				return this._MunicipioID;
+			}
+			set
+			{
+				if ((this._MunicipioID != value))
+				{
+					this.OnMunicipioIDChanging(value);
+					this.SendPropertyChanging();
+					this._MunicipioID = value;
+					this.SendPropertyChanged("MunicipioID");
+					this.OnMunicipioIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Product", Storage="_Products", ThisKey="SupplierID", OtherKey="SupplierID")]
 		public EntitySet<Product> Products
 		{
@@ -1519,6 +1589,298 @@ namespace CRUD.Models
 		{
 			this.SendPropertyChanging();
 			entity.Supplier = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cat_Estados")]
+	public partial class Cat_Estado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_estado;
+		
+		private string _descripcion;
+		
+		private System.Nullable<System.DateTime> _fecha_act;
+		
+		private System.Nullable<int> _usuario_act;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_estadoChanging(int value);
+    partial void Onid_estadoChanged();
+    partial void OndescripcionChanging(string value);
+    partial void OndescripcionChanged();
+    partial void Onfecha_actChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_actChanged();
+    partial void Onusuario_actChanging(System.Nullable<int> value);
+    partial void Onusuario_actChanged();
+    #endregion
+		
+		public Cat_Estado()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_estado", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id_estado
+		{
+			get
+			{
+				return this._id_estado;
+			}
+			set
+			{
+				if ((this._id_estado != value))
+				{
+					this.Onid_estadoChanging(value);
+					this.SendPropertyChanging();
+					this._id_estado = value;
+					this.SendPropertyChanged("id_estado");
+					this.Onid_estadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(500)")]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this.OndescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._descripcion = value;
+					this.SendPropertyChanged("descripcion");
+					this.OndescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_act", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fecha_act
+		{
+			get
+			{
+				return this._fecha_act;
+			}
+			set
+			{
+				if ((this._fecha_act != value))
+				{
+					this.Onfecha_actChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_act = value;
+					this.SendPropertyChanged("fecha_act");
+					this.Onfecha_actChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario_act", DbType="Int")]
+		public System.Nullable<int> usuario_act
+		{
+			get
+			{
+				return this._usuario_act;
+			}
+			set
+			{
+				if ((this._usuario_act != value))
+				{
+					this.Onusuario_actChanging(value);
+					this.SendPropertyChanging();
+					this._usuario_act = value;
+					this.SendPropertyChanged("usuario_act");
+					this.Onusuario_actChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cat_Municipio")]
+	public partial class Cat_Municipio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_municipio;
+		
+		private int _id_estado;
+		
+		private string _descripcion;
+		
+		private System.Nullable<System.DateTime> _fecha_act;
+		
+		private System.Nullable<int> _usuario_act;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_municipioChanging(int value);
+    partial void Onid_municipioChanged();
+    partial void Onid_estadoChanging(int value);
+    partial void Onid_estadoChanged();
+    partial void OndescripcionChanging(string value);
+    partial void OndescripcionChanged();
+    partial void Onfecha_actChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_actChanged();
+    partial void Onusuario_actChanging(System.Nullable<int> value);
+    partial void Onusuario_actChanged();
+    #endregion
+		
+		public Cat_Municipio()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_municipio", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id_municipio
+		{
+			get
+			{
+				return this._id_municipio;
+			}
+			set
+			{
+				if ((this._id_municipio != value))
+				{
+					this.Onid_municipioChanging(value);
+					this.SendPropertyChanging();
+					this._id_municipio = value;
+					this.SendPropertyChanged("id_municipio");
+					this.Onid_municipioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_estado", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id_estado
+		{
+			get
+			{
+				return this._id_estado;
+			}
+			set
+			{
+				if ((this._id_estado != value))
+				{
+					this.Onid_estadoChanging(value);
+					this.SendPropertyChanging();
+					this._id_estado = value;
+					this.SendPropertyChanged("id_estado");
+					this.Onid_estadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(MAX)")]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this.OndescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._descripcion = value;
+					this.SendPropertyChanged("descripcion");
+					this.OndescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_act", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fecha_act
+		{
+			get
+			{
+				return this._fecha_act;
+			}
+			set
+			{
+				if ((this._fecha_act != value))
+				{
+					this.Onfecha_actChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_act = value;
+					this.SendPropertyChanged("fecha_act");
+					this.Onfecha_actChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario_act", DbType="Int")]
+		public System.Nullable<int> usuario_act
+		{
+			get
+			{
+				return this._usuario_act;
+			}
+			set
+			{
+				if ((this._usuario_act != value))
+				{
+					this.Onusuario_actChanging(value);
+					this.SendPropertyChanging();
+					this._usuario_act = value;
+					this.SendPropertyChanged("usuario_act");
+					this.Onusuario_actChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

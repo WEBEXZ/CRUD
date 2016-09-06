@@ -79,7 +79,16 @@ namespace CRUD.Controllers
             RepoCRUD repo = new RepoCRUD();
             if (id != 0)
                 mdl.proveedor = repo.getProveedor(id);
+            ViewBag.nombreEstados = new SelectList(repo.getEstados(), "id_estado", "descripcion");
+            ViewBag.nombreMunicipios = new SelectList(repo.getMunicipios(), "id_estado", "descripcion");
             return View(mdl);
+        }
+
+        public JsonResult Municipios(int id)
+        {
+            ModeloCRUD mdl = new ModeloCRUD();
+            RepoCRUD repo = new RepoCRUD();
+            return Json(repo.getMunicipiosByEstado(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

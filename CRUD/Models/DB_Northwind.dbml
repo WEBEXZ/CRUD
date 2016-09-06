@@ -63,7 +63,26 @@
       <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
       <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
       <Column Name="HomePage" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EstadoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MunicipioID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Supplier_Product" Member="Products" ThisKey="SupplierID" OtherKey="SupplierID" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cat_Estados" Member="Cat_Estados">
+    <Type Name="Cat_Estado">
+      <Column Name="id_estado" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="fecha_act" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usuario_act" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cat_Municipio" Member="Cat_Municipios">
+    <Type Name="Cat_Municipio">
+      <Column Name="id_municipio" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_estado" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fecha_act" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usuario_act" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

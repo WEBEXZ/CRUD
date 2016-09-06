@@ -50,6 +50,25 @@
             </div>
         </div>
 
+        <div class="form-group col-md-6" >
+            <label for="txtEstado">Estado</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fa fa-sort-numeric-asc"></span>
+                </span>
+                <%: Html.DropDownListFor(m => m.proveedor.EstadoID, ViewBag.nombreEstados as SelectList, "Estados...", new { onChange = "show();"})%>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label for="txtEstado">Municipio</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fa fa-sort-numeric-asc"></span>
+                </span>
+                <%: Html.DropDownListFor(m => m.proveedor.MunicipioID, ViewBag.nombreMunicipios as SelectList, "Municipios...", new { disabled = true})%>
+            </div>
+        </div>
         
     </div>
     <div class="row  form-group" style="width:100%; margin-top:25px;">
@@ -64,4 +83,45 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
+    <script>
+        function show() {
+            var x = document.getElementById("proveedor_EstadoID").value;
+            var y = document.getElementById("proveedor_MunicipioID");
+            if (Number(x) > 0) {
+                y.disabled = false;
+                peticion(x);
+            } else {
+                y.disabled = true;
+            }
+        }
+
+        function peticion(pk) {
+            var y = document.getElementById("proveedor_MunicipioID");
+            $.ajax({
+                url: '/CRUD/Municipios/',
+                data: { id: pk },
+                type: 'GET',
+                dataType: 'json',
+                success: function(json) {
+                    y.innerHTML = "";
+                    var temporal = document.createElement("option");
+                    temporal.textContent = "Municipio....";
+                    temporal.setAttribute("Value", "");
+                    y.appendChild(temporal);
+                    for (var llave in json) {
+                        var option = document.createElement("option");
+                        option.setAttribute("Text", (json[llave]).descripcion);
+                        option.setAttribute("Value", (json[llave]).id_municipio);
+                        option.textContent = (json[llave]).descripcion;
+                        y.appendChild(option);
+                    }
+                },
+                error: function(xhr, status) {
+                    console.log(xhr);
+                    console.log(status);
+                    alert("Falló al solicitar el recurso");
+                }
+            });
+        }
+    </script>
 </asp:Content>

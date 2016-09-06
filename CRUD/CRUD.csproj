@@ -282,6 +282,7 @@
     <Content Include="Views\CRUD\Empleados.aspx" />
     <Content Include="Views\CRUD\FormularioProducto.aspx" />
     <Content Include="Views\CRUD\FormularioProveedor.aspx" />
+    <Content Include="Views\CRUD\Municipios.aspx" />
     <Content Include="Views\CRUD\Productos.aspx" />
     <Content Include="Views\CRUD\Proveedores.aspx" />
     <Content Include="Web.config" />

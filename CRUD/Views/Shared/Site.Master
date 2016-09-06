@@ -23,6 +23,8 @@
                         <ul id="menu">
                             <li><%: Html.ActionLink("Empleados", "Empleados", "CRUD") %></li>
                             <li><%: Html.ActionLink("Productos", "Productos", "CRUD") %></li>
+                            <li><%: Html.ActionLink("Categorias", "Categorias", "CRUD") %></li>
+                            <li><%: Html.ActionLink("Proveedores", "Proveedores", "CRUD") %></li>
                         </ul>
                     </nav>
                 </div>

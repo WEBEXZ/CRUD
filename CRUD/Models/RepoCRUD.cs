@@ -43,6 +43,30 @@ namespace CRUD.Models
             return proveedor;
         }
 
+        //Obtener un estado por ID
+        public Cat_Estado getEstado(int id)
+        {
+            Cat_Estado proveedor = new Cat_Estado();
+            proveedor = db.Cat_Estados.SingleOrDefault(p => p.id_estado == id);
+            return proveedor;
+        }
+
+        //Obtener un municipio por ID
+        public Cat_Municipio getMunicipio(int id)
+        {
+            Cat_Municipio proveedor = new Cat_Municipio();
+            proveedor = db.Cat_Municipios.SingleOrDefault(p => p.id_municipio == id);
+            return proveedor;
+        }
+
+        //Obtener municipios por ID del estado
+        public List<Cat_Municipio> getMunicipiosByEstado(int id) 
+        { 
+            List<Cat_Municipio> m = new List<Cat_Municipio>();
+            m = db.Cat_Municipios.Where(x => x.id_estado == id).ToList();
+            return m;
+        }
+
         //Obtener lista de empleados
         public List<Employee> getEmpleados()
         {
@@ -72,6 +96,22 @@ namespace CRUD.Models
         {
             List<Supplier> lista = new List<Supplier>();
             lista = db.Suppliers.ToList();
+            return lista;
+        }
+
+        //Obtener lista de estados
+        public List<Cat_Estado> getEstados()
+        {
+            List<Cat_Estado> lista = new List<Cat_Estado>();
+            lista = db.Cat_Estados.ToList();
+            return lista;
+        }
+
+        //Obtener lista de municipios
+        public List<Cat_Municipio> getMunicipios()
+        {
+            List<Cat_Municipio> lista = new List<Cat_Municipio>();
+            lista = db.Cat_Municipios.ToList();
             return lista;
         }
 
@@ -211,6 +251,8 @@ namespace CRUD.Models
                 proveedorActual.ContactName = p.ContactName;
                 proveedorActual.Address = p.Address;
                 proveedorActual.Phone = p.Phone;
+                proveedorActual.EstadoID = p.EstadoID;
+                proveedorActual.MunicipioID = p.MunicipioID;
                 db.SubmitChanges();
                 return true;
             }
